@@ -1,0 +1,82 @@
+os: linux
+dist: jammy
+language: php
+php:
+- 8.2
+
+cache:
+  npm: true
+  yarn: true
+  directories:
+  - "$HOME/.composer/cache"
+  - "$HOME/.yarn"
+  - "./private/node_modules"
+  - "./vendor"
+
+before_install:
+- phpenv config-rm xdebug.ini
+
+install:
+- composer config github-oauth.github.com "$GITHUB_TOKEN"
+- composer install
+- nvm install 20 && nvm use 20
+- corepack enable
+- cd private && yarn && cd ..
+
+jobs:
+  include:
+  - stage: Lint
+    script:
+    - cd private && yarn && yarn build && cd ..
+    - composer lint
+
+  - stage: Update Draft GitHub Release
+    if: branch = develop
+    script:
+    - cd private && yarn && yarn build && cd ..
+    - zip -r ../humanity-salesforce-connector-develop.zip ./ -x docs\* -x private\* -x vendor\* -x .\* -x CHANGELOG.md -x CODE_OF_CONDUCT.md -x composer.json -x composer.lock -x CONTRIBUTING.md -x LICENSE.md -x phpcs.xml -x SECURITY.md
+    deploy:
+      provider: releases
+      token:
+        secure: "WjurNnCd7DXBuWZRWyg3xSt7UxtCnrqz11CpEMt1yh3ovR9KRbYVlnvss/EEfxpLGupk04YV1eLx9RlYkHQTm0wCr/06hyISesKviNhlTxWXsqJLGcn249gethykab0WEtbtggAbfkhtR2lxx07tSyMPzElSsLieXsqpOKOTvFv+99aOc3Qx60P40qeK/4BHd03rsuRyxkXVGEVp5Lhs7mlmqAOR2eusuB0XK8LZUWc2jbzznTBAK//Im1Rzk1cIgg6l1sugTePE+MV9x9qI3UDbLs5WN/tBbxytFKZ8jgdv44xbUxdC4MxjEpYvHfSibVP2hfd6z6eK2xy9iRgq8hwLDulhOM2SgGL/1WgLSOcM0Pmf/4E76iJaEu6ZGvY7wRoB5uEPq5+/eXVyI2UCy6Sq+yYT+5XLoOYj36PhSQtKSCloOo+k4EvCg6HY58q8v+5YG419NtoTkuuGHf2vtg1plE/wH8hr10SuP5rphpTS6ZdVOhEs7fp34PLep6ban3ACu3EKneE48ArOYvIEkZ88VXYBNjXmoHeOANPqcGCriN5xRbMB1zlbHFoM5EVUsrKftAIJbunH0I57+G2MYrFAGprEkeAb2FjCxUafqRcalpZmY0qiKWpQ2O2II/Lb8sl5uo5xycRhbPTPng3Q3ScKPhLag1Ev2/Ikpqt0ppw="
+      file: "../humanity-salesforce-connector-develop.zip"
+      skip_cleanup: true
+      draft: true
+      overwrite: true
+      on:
+        repo: amnestywebsite/humanity-salesforce-connector
+        branch: develop
+
+  - stage: Update Draft GitHub Release
+    if: branch = staging
+    script:
+    - cd private && yarn && yarn build && cd ..
+    - zip -r ../humanity-salesforce-connector-staging.zip ./ -x docs\* -x private\* -x vendor\* -x .\* -x CHANGELOG.md -x CODE_OF_CONDUCT.md -x composer.json -x composer.lock -x CONTRIBUTING.md -x LICENSE.md -x phpcs.xml -x SECURITY.md
+    deploy:
+      provider: releases
+      token:
+        secure: "WjurNnCd7DXBuWZRWyg3xSt7UxtCnrqz11CpEMt1yh3ovR9KRbYVlnvss/EEfxpLGupk04YV1eLx9RlYkHQTm0wCr/06hyISesKviNhlTxWXsqJLGcn249gethykab0WEtbtggAbfkhtR2lxx07tSyMPzElSsLieXsqpOKOTvFv+99aOc3Qx60P40qeK/4BHd03rsuRyxkXVGEVp5Lhs7mlmqAOR2eusuB0XK8LZUWc2jbzznTBAK//Im1Rzk1cIgg6l1sugTePE+MV9x9qI3UDbLs5WN/tBbxytFKZ8jgdv44xbUxdC4MxjEpYvHfSibVP2hfd6z6eK2xy9iRgq8hwLDulhOM2SgGL/1WgLSOcM0Pmf/4E76iJaEu6ZGvY7wRoB5uEPq5+/eXVyI2UCy6Sq+yYT+5XLoOYj36PhSQtKSCloOo+k4EvCg6HY58q8v+5YG419NtoTkuuGHf2vtg1plE/wH8hr10SuP5rphpTS6ZdVOhEs7fp34PLep6ban3ACu3EKneE48ArOYvIEkZ88VXYBNjXmoHeOANPqcGCriN5xRbMB1zlbHFoM5EVUsrKftAIJbunH0I57+G2MYrFAGprEkeAb2FjCxUafqRcalpZmY0qiKWpQ2O2II/Lb8sl5uo5xycRhbPTPng3Q3ScKPhLag1Ev2/Ikpqt0ppw="
+      file: "../humanity-salesforce-connector-staging.zip"
+      skip_cleanup: true
+      draft: true
+      overwrite: true
+      on:
+        repo: amnestywebsite/humanity-salesforce-connector
+        branch: staging
+
+  - stage: Update Draft GitHub Release
+    if: branch = main
+    script:
+    - cd private && yarn && yarn build && cd ..
+    - zip -r ../humanity-salesforce-connector.zip ./ -x docs\* -x private\* -x vendor\* -x .\* -x CHANGELOG.md -x CODE_OF_CONDUCT.md -x composer.json -x composer.lock -x CONTRIBUTING.md -x LICENSE.md -x phpcs.xml -x SECURITY.md
+    deploy:
+      provider: releases
+      token:
+        secure: "WjurNnCd7DXBuWZRWyg3xSt7UxtCnrqz11CpEMt1yh3ovR9KRbYVlnvss/EEfxpLGupk04YV1eLx9RlYkHQTm0wCr/06hyISesKviNhlTxWXsqJLGcn249gethykab0WEtbtggAbfkhtR2lxx07tSyMPzElSsLieXsqpOKOTvFv+99aOc3Qx60P40qeK/4BHd03rsuRyxkXVGEVp5Lhs7mlmqAOR2eusuB0XK8LZUWc2jbzznTBAK//Im1Rzk1cIgg6l1sugTePE+MV9x9qI3UDbLs5WN/tBbxytFKZ8jgdv44xbUxdC4MxjEpYvHfSibVP2hfd6z6eK2xy9iRgq8hwLDulhOM2SgGL/1WgLSOcM0Pmf/4E76iJaEu6ZGvY7wRoB5uEPq5+/eXVyI2UCy6Sq+yYT+5XLoOYj36PhSQtKSCloOo+k4EvCg6HY58q8v+5YG419NtoTkuuGHf2vtg1plE/wH8hr10SuP5rphpTS6ZdVOhEs7fp34PLep6ban3ACu3EKneE48ArOYvIEkZ88VXYBNjXmoHeOANPqcGCriN5xRbMB1zlbHFoM5EVUsrKftAIJbunH0I57+G2MYrFAGprEkeAb2FjCxUafqRcalpZmY0qiKWpQ2O2II/Lb8sl5uo5xycRhbPTPng3Q3ScKPhLag1Ev2/Ikpqt0ppw="
+      file: "../humanity-salesforce-connector.zip"
+      skip_cleanup: true
+      draft: true
+      overwrite: true
+      on:
+        repo: amnestywebsite/humanity-salesforce-connector
+        branch: main

@@ -1,0 +1,19 @@
+includes:
+  - vendor/phpstan/phpstan-strict-rules/rules.neon
+
+parameters:
+  level: 5
+  checkGenericClassInNonGenericObjectType: false
+  reportMaybesInPropertyPhpDocTypes: false
+  paths:
+    - amnesty-salesforce-connector.php
+    - includes
+  scanDirectories:
+    - vendor/amnestywebsite/humanity-theme/wp-content/themes/humanity-theme
+    - vendor/cmb2/cmb2
+    - vendor/php-stubs/wordpress-stubs
+  ignoreErrors:
+    - '#Constant MINUTE_IN_SECONDS not found#'
+    - '#Constant ABSPATH not found#'
+    - '#Constant WP_CONTENT_DIR not found#'
+    - '#Constant ARRAY_A not found#'
