@@ -1,0 +1,139 @@
+# Copyright (C) 2024 Amnesty International
+# This file is distributed under the GPLv2.
+msgid ""
+msgstr ""
+"Project-Id-Version: Humanity Salesforce Connector 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/salesforce-connector\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2024-02-08T16:04:38+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.8.1\n"
+"X-Domain: aisc\n"
+
+#. Plugin Name of the plugin
+msgid "Humanity Salesforce Connector"
+msgstr ""
+
+#. Plugin URI of the plugin
+msgid "https://github.com/amnestywebsite/humanity-salesforce-connector"
+msgstr ""
+
+#. Description of the plugin
+msgid "Add Salesforce oAuth connector for use by other Humanity plugins"
+msgstr ""
+
+#. Author of the plugin
+msgid "Amnesty International"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://www.amnesty.org"
+msgstr ""
+
+#: includes/class-logs-list-table.php:31
+msgid "Log"
+msgstr ""
+
+#: includes/class-logs-list-table.php:32
+msgid "Logs"
+msgstr ""
+
+#: includes/class-logs-list-table.php:46
+msgid "ID"
+msgstr ""
+
+#: includes/class-logs-list-table.php:47
+msgid "Timestamp"
+msgstr ""
+
+#: includes/class-logs-list-table.php:48
+msgid "Severity"
+msgstr ""
+
+#: includes/class-logs-list-table.php:49
+msgid "Message"
+msgstr ""
+
+#: includes/class-logs-list-table.php:50
+msgid "Stacktrace"
+msgstr ""
+
+#: includes/class-oauth2.php:131
+#: includes/class-oauth2.php:183
+msgid "oAuth response invalid"
+msgstr ""
+
+#: includes/class-oauth2.php:138
+msgid "oAuth state invalid"
+msgstr ""
+
+#: includes/class-oauth2.php:178
+#: includes/class-oauth2.php:244
+msgid "Token signature verification failed"
+msgstr ""
+
+#: includes/class-oauth2.php:189
+msgid "Successfully authenticated"
+msgstr ""
+
+#: includes/class-oauth2.php:200
+msgid "Failed to retrieve refresh token"
+msgstr ""
+
+#: includes/class-oauth2.php:206
+msgid "Missing credentials for refreshing token"
+msgstr ""
+
+#: includes/class-oauth2.php:249
+msgid "Successfully refreshed token"
+msgstr ""
+
+#: includes/class-oauth2.php:261
+msgid "No Access Token to revoke"
+msgstr ""
+
+#: includes/class-oauth2.php:280
+msgid "Access Token(s) successfully revoked"
+msgstr ""
+
+#: includes/class-request.php:196
+msgid "Instance URL not found."
+msgstr ""
+
+#: includes/class-request.php:222
+msgid "Access Token Not Found"
+msgstr ""
+
+#: includes/class-rest-api.php:165
+msgid "Failed to get object field"
+msgstr ""
+
+#: includes/fields/class-boolean.php:33
+msgid "No"
+msgstr ""
+
+#: includes/fields/class-boolean.php:34
+msgid "Yes"
+msgstr ""
+
+#: messages/notice.php:3
+msgid "Click this link to complete the Salesforce Connected App authorisation"
+msgstr ""
+
+#: messages/notice.php:4
+msgid "Authorise"
+msgstr ""
+
+#. translators: %1$s: line break, %2$s: documentation link
+#: messages/oauth2.php:7
+msgid "You need to create a Connected App to generate your Client ID/Secret keys; see %2$s for further details.%1$s"
+msgstr ""
+
+#. translators: %1$s: line break, %2$s: required permissions, %3$s: callback URL
+#: messages/oauth2.php:21
+msgid "Please ensure that your Connected App has the following oAuth permissions: %2$s.%1$sThe Callback URL must be set to this: %3$s."
+msgstr ""
