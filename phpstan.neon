@@ -1,5 +1,6 @@
 includes:
   - vendor/phpstan/phpstan-strict-rules/rules.neon
+  - vendor/szepeviktor/phpstan-wordpress/extension.neon
 
 parameters:
   level: 5
@@ -11,9 +12,3 @@ parameters:
   scanDirectories:
     - vendor/amnestywebsite/humanity-theme/wp-content/themes/humanity-theme
     - vendor/cmb2/cmb2
-    - vendor/php-stubs/wordpress-stubs
-  ignoreErrors:
-    - '#Constant MINUTE_IN_SECONDS not found#'
-    - '#Constant ABSPATH not found#'
-    - '#Constant WP_CONTENT_DIR not found#'
-    - '#Constant ARRAY_A not found#'

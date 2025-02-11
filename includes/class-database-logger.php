@@ -73,20 +73,13 @@ class Database_Logger extends AbstractLogger {
 		array_shift( $trace );
 
 		// decrement a call stack number
-		$line_no = function ( array $matches = [] ): string {
-			return '#' . ( --$matches[1] );
-		};
+		$line_no = fn ( array $matches = [] ): string => '#' . ( --$matches[1] );
 
-		// phpcs:disable Generic.Formatting.MultipleStatementAlignment.NotSameWarning
 		// readjust call stack numbers
-		$lines = function ( string $line = '' ) use ( $line_no ): string {
-			return preg_replace_callback( '/^#(\d+)\s/', $line_no, $line );
-		};
+		$lines = fn ( string $line = '' ): string => preg_replace_callback( '/^#(\d+)/', $line_no, $line );
 
 		// strip extraneous path levels from file names
-		$paths = function ( string $line = '' ): string {
-			return str_replace( trailingslashit( WP_CONTENT_DIR ), '', $line );
-		};
+		$paths = fn ( string $line = '' ): string => str_replace( trailingslashit( WP_CONTENT_DIR ), '', $line );
 
 		$trace = array_map( $lines, $trace );
 		$trace = array_map( $paths, $trace );
@@ -170,7 +163,6 @@ class Database_Logger extends AbstractLogger {
 			KEY `severity` (`severity`)
 		) ENGINE=InnoDB DEFAULT CHARSET={$wpdb->charset} COLLATE={$wpdb->collate};";
 
-		// phpcs:ignore
 		dbDelta( $create );
 	}
 

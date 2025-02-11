@@ -7,13 +7,10 @@
     "fix": "./vendor/bin/phpcbf .",
     "pre-commit": "composer analyse && composer lint",
     "lang": [
-      "type msgmerge &> /dev/null || { echo 'Please install gettext'; exit 1; }",
-      "wp i18n make-pot . ./languages/aisc.pot --domain=aisc --exclude=private/node_modules,assets,vendor",
-      "for p in ./languages/*.po; do msguniq \"$p\" -o \"$p\"; done",
-      "for p in ./languages/*.po; do msgmerge --quiet -o \"$p.tmp\" --no-fuzzy-matching \"$p\" \"./languages/aisc.pot\"; done",
-      "for p in ./languages/*.po; do msgattrib --no-obsolete -o \"$p\" \"$p.tmp\"; done",
-      "for p in ./languages/*.po.tmp; do rm \"$p\"; done",
-      "for p in ./languages/*.po; do msgfmt -cv --statistics \"$p\" -o \"${p%.*}.mo\"; done"
+      "wp i18n make-pot . ./languages/aisc.pot --domain=aisc --exclude=private,vendor",
+      "wp i18n update-po ./languages/aisc.pot",
+      "wp i18n make-mo ./languages",
+      "wp i18n make-json ./languages --no-purge"
     ]
   },
   "require-dev": {
@@ -21,12 +18,14 @@
     "cmb2/cmb2": "dev-develop",
     "phpstan/phpstan": "^1.10",
     "phpstan/phpstan-strict-rules": "^1.5",
-    "php-stubs/wordpress-stubs": "^6.4",
-    "bigbite/phpcs-config": "^2.0.0"
+    "bigbite/phpcs-config": "^2.0.0",
+    "szepeviktor/phpstan-wordpress": "^1.3"
   },
   "scripts-descriptions": {
-    "lang": "Updates the POT file, then updates any PO files, and (re)compiles associated MO files",
-    "lint": "Runs PHP coding standard checks"
+    "analyse": "Runs PHPStan static analysis",
+    "lint": "Runs PHP coding standard checks",
+    "fix": "Runs PHP coding standard fixes",
+    "lang": "Updates the POT file, then updates any PO files, and (re)compiles associated MO & JSON files"
   },
   "repositories": [
     {

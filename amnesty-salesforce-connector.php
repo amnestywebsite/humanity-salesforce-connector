@@ -1,25 +1,25 @@
 <?php // phpcs:ignore WordPress.Files.FileName.InvalidClassFileName
 
+/**
+ * Plugin Name:       Humanity Salesforce Connector
+ * Plugin URI:        https://github.com/amnestywebsite/humanity-salesforce-connector
+ * Description:       Add Salesforce oAuth connector for use by other Humanity plugins
+ * Version:           1.0.0
+ * Author:            Amnesty International
+ * Author URI:        https://www.amnesty.org
+ * License:           GPL-2.0-or-later
+ * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
+ * Text Domain:       aisc
+ * Domain Path:       /languages
+ * Network:           true
+ * Requires PHP:      8.2
+ * Requires at least: 5.8.0
+ * Tested up to:      6.6.2
+ */
+
 declare( strict_types = 1 );
 
 namespace Amnesty\Salesforce;
-
-/*
-Plugin Name:       Humanity Salesforce Connector
-Plugin URI:        https://github.com/amnestywebsite/humanity-salesforce-connector
-Description:       Add Salesforce oAuth connector for use by other Humanity plugins
-Version:           1.0.0
-Author:            Amnesty International
-Author URI:        https://www.amnesty.org
-License:           GPLv2
-License URI:       https://www.gnu.org/licenses/gpl-2.0.html
-Text Domain:       aisc
-Domain Path:       /languages
-Network:           true
-Requires PHP:      8.2
-Requires at least: 5.8.0
-Tested up to:      6.4.2
-*/
 
 use WP;
 use WP_REST_Request;
