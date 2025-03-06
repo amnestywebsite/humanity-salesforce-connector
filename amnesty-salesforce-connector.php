@@ -15,6 +15,7 @@
  * Requires PHP:      8.2
  * Requires at least: 5.8.0
  * Tested up to:      6.7.2
+ * Requires plugins:  cmb2
  */
 
 declare( strict_types = 1 );
@@ -108,7 +109,6 @@ class Connector {
 
 		add_filter( 'translatable_packages', [ $this, 'register_translatable_package' ], 12 );
 
-		add_action( 'all_admin_notices', [ $this, 'check_dependencies' ] );
 
 		add_action( 'plugins_loaded', [ $this, 'textdomain' ] );
 		add_action( 'plugins_loaded', [ $this, 'boot' ], 1 );
@@ -136,23 +136,6 @@ class Connector {
 		];
 
 		return $packages;
-	}
-
-	/**
-	 * Output warning & deactivate if dependent plugins aren't active
-	 *
-	 * @return void
-	 */
-	public function check_dependencies(): void {
-		if ( function_exists( 'cmb2_bootstrap' ) ) {
-			return;
-		}
-
-		$missing = 'CMB2';
-
-		// translators: %1$s: the name of this plugin, %2$s: list of missing plugins
-		printf( '<div class="notice notice-error"><p>%s</p></div>', sprintf( esc_html__( '%1$s requires these plugins to be active: %2$s', 'aip-sf' ), esc_html( $this->data['Name'] ), esc_html( $missing ) ) );
-		deactivate_plugins( plugin_basename( __FILE__ ), false, is_multisite() );
 	}
 
 	/**
