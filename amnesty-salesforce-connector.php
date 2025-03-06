@@ -105,13 +105,11 @@ class Connector {
 	 * Bind hooks
 	 */
 	public function __construct() {
-		$this->data = get_plugin_data( __FILE__ );
-
 		add_filter( 'translatable_packages', [ $this, 'register_translatable_package' ], 12 );
 
 
-		add_action( 'plugins_loaded', [ $this, 'textdomain' ] );
 		add_action( 'plugins_loaded', [ $this, 'boot' ], 1 );
+		add_action( 'init', [ $this, 'textdomain' ] );
 		add_action( 'init', [ $this, 'var' ] );
 		add_action( 'parse_request', [ $this, 'request' ] );
 		add_action( 'init', [ $this, 'rewrite' ], 10 );
@@ -153,6 +151,8 @@ class Connector {
 	 * @return void
 	 */
 	public function textdomain(): void {
+		$this->data = get_plugin_data( __FILE__ );
+
 		load_plugin_textdomain( 'aisc', false, basename( __DIR__ ) . '/languages' );
 	}
 
