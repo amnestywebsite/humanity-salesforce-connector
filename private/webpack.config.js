@@ -1,8 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
 const ESLintPlugin = require('eslint-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const StyleLintPlugin = require('stylelint-webpack-plugin');
 const { EsbuildPlugin } = require('esbuild-loader');
 
 // Project paths.
@@ -76,37 +74,9 @@ const config = (env, argv) => ({
     new ESLintPlugin(),
     // Sets mode so we can access it in `postcss.config.js`.
     new webpack.LoaderOptionsPlugin({ options: { mode: argv.mode } }),
-    // Extract CSS to own bundle, filename relative to output.path.
-    new MiniCssExtractPlugin({ filename: '../styles/[name].css', chunkFilename: '[name].css' }),
-    new StyleLintPlugin({ threads: true }),
   ],
   module: {
     rules: [
-      {
-        test: /\.s?(a|c)?ss$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          {
-            loader: 'css-loader',
-            options: {
-              sourceMap: true,
-              url: false,
-            },
-          },
-          {
-            loader: 'postcss-loader',
-            options: {
-              sourceMap: true,
-            },
-          },
-          {
-            loader: 'sass-loader',
-            options: {
-              sourceMap: true,
-            },
-          },
-        ],
-      },
       {
         test: /\.jsx?$/,
         exclude: /(lodash|node_modules|react(-dom)?)/,
