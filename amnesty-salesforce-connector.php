@@ -4,7 +4,7 @@
  * Plugin Name:       Humanity Salesforce Connector
  * Plugin URI:        https://github.com/amnestywebsite/humanity-salesforce-connector
  * Description:       Add Salesforce oAuth connector for use by other Humanity plugins
- * Version:           1.0.1
+ * Version:           1.0.2
  * Author:            Amnesty International
  * Author URI:        https://www.amnesty.org
  * License:           GPL-2.0-or-later
@@ -106,7 +106,6 @@ class Connector {
 	 */
 	public function __construct() {
 		add_filter( 'translatable_packages', [ $this, 'register_translatable_package' ], 12 );
-
 
 		add_action( 'plugins_loaded', [ $this, 'boot' ], 1 );
 		add_action( 'init', [ $this, 'textdomain' ] );
